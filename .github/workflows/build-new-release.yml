@@ -81,7 +81,7 @@ jobs:
       - name: Clone jellyfin-tizen
         uses: sudosubin/git-clone-action@v1.0.1
         with:
-          repository: 'jellyfin/jellyfin-tizen'
+          repository: 'The1Penguin/jellyfin-tizen'
           platform: 'github'
           path: 'jellyfin-tizen'
           
@@ -137,7 +137,7 @@ jobs:
         if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           cd jellyfin-tizen
-          ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-master -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+          ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-master -e ".git" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
       - name: Build jellyfin-tizen Release
         id: buildRelease
@@ -152,7 +152,7 @@ jobs:
         run: |
           cd jellyfin-tizen
           DISCARD_UNUSED_FONTS=1
-          ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+          ../tizen-studio/tools/ide/bin/tizen build-web -e ".git" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
       - name: Build jellyfin-tizen PreRelease
         id: buildPreRelease
@@ -166,7 +166,7 @@ jobs:
         if: success() || steps.buildPreRelease.conclusion == 'success'
         run: |
           cd jellyfin-tizen
-          ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-prerelease -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+          ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-prerelease -e ".git" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
       - name: Prepare for password prompt
         if: success() || steps.buildMaster.conclusion == 'success'
